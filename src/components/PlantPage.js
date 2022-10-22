@@ -6,6 +6,7 @@ import Search from "./Search";
 function PlantPage() {
   //lift state to this level
   const [plants, setPlants] = useState([]);
+  const [search, setSearch] = useState("");
 
   //fetch all plants on mount
   useEffect(() => {
@@ -20,11 +21,13 @@ function PlantPage() {
     setPlants(updatedPlants);
   }
 
+  const visiblePlants = plants.filter(plant => plant.name.toLowerCase().includes(search.toLowerCase()))
+
   return (
     <main>
       <NewPlantForm onAddPlant={addNewPlant}/>
-      <Search />
-      <PlantList plants={plants}/>
+      <Search onSearch={setSearch}/>
+      <PlantList plants={visiblePlants}/>
     </main>
   );
 }
