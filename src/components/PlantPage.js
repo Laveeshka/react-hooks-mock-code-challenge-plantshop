@@ -16,18 +16,31 @@ function PlantPage() {
       .catch(err => console.warn(err.message))
   }, [])
 
+  let visiblePlants = plants.filter(plant => plant.name.toLowerCase().includes(search.toLowerCase()));
+
   function addNewPlant(newPlant){
     const updatedPlants = [...plants, newPlant];
     setPlants(updatedPlants);
   }
 
-  const visiblePlants = plants.filter(plant => plant.name.toLowerCase().includes(search.toLowerCase()))
+  function handleUpdatePlant(updatedPlant){
+    const updatedPlants = plants.map(plant => {
+      if(plant.id === updatedPlant.id){
+        return updatedPlant;
+      }
+      else {
+        return plant;
+      }
+    });
+    setPlants(updatedPlants);
+  }
+
 
   return (
     <main>
       <NewPlantForm onAddPlant={addNewPlant}/>
       <Search onSearch={setSearch}/>
-      <PlantList plants={visiblePlants}/>
+      <PlantList plants={visiblePlants} onUpdatePlant={handleUpdatePlant}/>
     </main>
   );
 }
