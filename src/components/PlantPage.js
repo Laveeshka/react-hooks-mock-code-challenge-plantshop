@@ -15,9 +15,14 @@ function PlantPage() {
       .catch(err => console.warn(err.message))
   }, [])
 
+  function addNewPlant(newPlant){
+    const updatedPlants = [...plants, newPlant];
+    setPlants(updatedPlants);
+  }
+
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm onAddPlant={addNewPlant}/>
       <Search />
       <PlantList plants={plants}/>
     </main>

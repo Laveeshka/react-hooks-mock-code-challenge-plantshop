@@ -41,6 +41,12 @@
       "name": "Fiddle Leaf Fig",
       "image": "./images/fiddle-leaf-fig.jpg",
       "price": 55
+    },
+    {
+      "name": "Pink houseplant",
+      "image": "https://media.glamour.com/photos/5ea89429e67f360008b064d8/master/w_320%2Cc_limit/Pink%2520Anthurium.png",
+      "price": 45.55,
+      "id": 8
     }
   ]
 }
