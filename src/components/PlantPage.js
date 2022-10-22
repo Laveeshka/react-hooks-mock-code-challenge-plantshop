@@ -35,12 +35,17 @@ function PlantPage() {
     setPlants(updatedPlants);
   }
 
+  function handleDeletePlant(deletedPlant){
+    const updatedPlants = plants.filter(plant => plant.id !== deletedPlant.id);
+    setPlants(updatedPlants);
+  }
+
 
   return (
     <main>
       <NewPlantForm onAddPlant={addNewPlant}/>
       <Search onSearch={setSearch}/>
-      <PlantList plants={visiblePlants} onUpdatePlant={handleUpdatePlant}/>
+      <PlantList plants={visiblePlants} onUpdatePlant={handleUpdatePlant} onDeletePlant={handleDeletePlant}/>
     </main>
   );
 }

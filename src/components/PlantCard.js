@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function PlantCard({plant, onUpdatePlant}) {
+function PlantCard({plant, onUpdatePlant, onDeletePlant}) {
     //destructure plant object
     const {id, name, image, price} = plant;
 
@@ -33,6 +33,16 @@ function PlantCard({plant, onUpdatePlant}) {
       .then(updatedPlant => onUpdatePlant(updatedPlant))
   }
 
+  function handleDeleteClick(){
+    //delete request
+    fetch(`http://localhost:6001/plants/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(() => onDeletePlant(plant))
+      .catch(err => console.warn(err.message))
+  }
+
   return (
     <li className="card">
       <img src={image} alt={name} />
@@ -49,6 +59,7 @@ function PlantCard({plant, onUpdatePlant}) {
       ) : (
         <button onClick={toggleInStock}>Out of Stock</button>
       )}
+      <button onClick={handleDeleteClick}>Delete</button>
     </li>
   );
 }
